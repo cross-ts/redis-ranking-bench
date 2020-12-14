@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: ./app
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    networks:
+      - backend
+    command: ["bundle", "exec", "app.rb"]
+  redis:
+    image: redis:latest
+    networks:
+      - backend
+
+networks:
+  backend:
